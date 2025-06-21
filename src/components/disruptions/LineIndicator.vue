@@ -8,7 +8,7 @@ const props = defineProps<{
   size: "default" | "small"
 }>()
 
-const sizeVw = computed(() => (props.size === "default" ? "5vw" : "2vw"))
+const sizeVw = computed(() => (props.size === "default" ? "4.7vw" : "2vw"))
 </script>
 
 <template>

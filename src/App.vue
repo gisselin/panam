@@ -31,6 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- <img src="/templates/full.halted.jpeg" alt="" /> -->
   <Screen
     v-if="lat && lon && lineNumber"
     :lat="lat"
@@ -49,6 +50,22 @@ onMounted(() => {
 </template>
 
 <style scoped>
+img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 999;
+  opacity: 0.3;
+  border: 1px solid red;
+}
+
+img.diff {
+  opacity: 1;
+  mix-blend-mode: difference;
+}
+
 footer {
   padding: 0.5rem 2rem;
   color: gray;

@@ -88,6 +88,7 @@ aside {
   grid-template-rows: auto 1fr;
   background-color: white;
   overflow: hidden;
+  border-radius: 0.4vw 0.4vw 0 0;
 }
 
 header {
@@ -110,7 +111,7 @@ header {
   height: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 2vw;
+  padding: 0.8vw 2vw;
   padding-right: calc(env(safe-area-inset-right) + 2vw);
   font-size: var(--font-size);
 }

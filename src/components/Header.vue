@@ -15,7 +15,7 @@ defineProps<{
       <div v-html="line.pictoSvg" class="picto"></div>
       <LineIndicator :line="line" height="8vw"></LineIndicator>
     </div>
-    <h1>{{ direction }}</h1>
+    <h1>{{ direction.split("(").at(0) }}</h1>
   </header>
 </template>
 

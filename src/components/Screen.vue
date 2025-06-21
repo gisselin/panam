@@ -109,6 +109,10 @@ const serviceIsSuspended = computed<boolean>(() => {
   )
 })
 
+const isLastTrain = computed<boolean>(() => {
+  return departures.value.length === 1
+})
+
 useIntervalFn(async () => {
   await updateDepartures()
 }, 61 * 1000)
@@ -142,11 +146,24 @@ onMounted(async () => {
       >
         <article
           v-for="(departure, i) in departures.slice(0, 2)"
+          :class="{ labelsHidden: isLastTrain }"
           :key="departure.id"
         >
-          <span v-if="i == 0">1<sup>er</sup> métro</span>
-          <span v-if="i == 1">2<sup>e</sup> métro</span>
+          <span class="label" v-if="i == 0">1<sup>er</sup> métro</span>
+          <span class="label" v-if="i == 1">2<sup>e</sup> métro</span>
           <WaitingTime font-size="18vw" :at="departure.leavesAt"></WaitingTime>
+        </article>
+        <article class="lastTrain" v-if="isLastTrain">
+          <svg
+            width="102"
+            height="118"
+            viewBox="0 0 102 118"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0 59.0001L102 0.110352V117.89L0 59.0001Z" fill="white" />
+          </svg>
+          <span>Dernier<br />métro</span>
         </article>
       </TransitionGroup>
       <TransitionGroup name="vertical" tag="ul" v-else>
@@ -156,7 +173,7 @@ onMounted(async () => {
           :key="departure.id"
         ></DepartureRow>
       </TransitionGroup>
-      <Slider :disruptions="disruptions"></Slider>
+      <Slider class="slider" :disruptions="disruptions"></Slider>
     </div>
   </main>
 </template>
@@ -172,7 +189,7 @@ main {
 .clock {
   position: absolute;
   top: 0;
-  right: calc(env(safe-area-inset-left) + 2vw);
+  right: calc(env(safe-area-inset-left) + 1.5vw);
   z-index: 1;
 }
 
@@ -201,7 +218,29 @@ article {
   width: 50%;
 }
 
-article:last-child::before {
+article.labelsHidden .label {
+  opacity: 0;
+}
+
+article.lastTrain {
+  flex-direction: row;
+  align-items: center;
+  transform: translateX(-3vw);
+}
+
+article.lastTrain span {
+  padding-top: 3vw;
+  font-size: 4.2vw;
+  font-weight: bold;
+}
+
+article.lastTrain svg {
+  width: 6vw;
+  height: 6vw;
+  padding-top: 3vw;
+}
+
+article:last-child:not(.lastTrain)::before {
   --offset: 22%;
   content: "";
   position: absolute;
@@ -229,6 +268,10 @@ article time {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
+}
+
+.slider {
+  margin-top: var(--panel-top-gap);
 }
 
 @media (max-height: 40vw) {

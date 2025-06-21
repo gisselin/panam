@@ -8,6 +8,7 @@ body {
 :root {
     --station-text-color: #0E0184;
     --waiting-time-color: #FFBE00;
+    --panel-top-gap: 1.5vw;
 }
 
 @font-face {

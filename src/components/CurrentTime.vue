@@ -20,11 +20,12 @@ useIntervalFn(() => {
 
 <style scoped>
 time {
-  --border-radius: 0.6vw;
-  padding: 0.6vw 1.2vw;
+  --border-radius: 0.4vw;
+  padding: var(--panel-top-gap) 1vw 0.5vw 1vw;
   background-color: black;
   color: var(--waiting-time-color);
-  font-size: 5.5vw;
+  font-size: 4.2vw;
+  line-height: 4vw;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
@@ -38,9 +39,9 @@ span:nth-child(2) {
   }
 }
 
-@media (max-height: 40vw) {
+/* @media (max-height: 40vw) {
   time {
     font-size: 3.5vw;
   }
-}
+} */
 </style>
